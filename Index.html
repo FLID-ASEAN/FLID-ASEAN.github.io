@@ -88,6 +88,116 @@ body, html {
     margin-top: 10px;
 }
 	
+	    
+    /* Overlay behind the panel */
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1999;
+      display: none;
+    }
+
+    #overlay.active {
+      display: block;
+    }
+
+    /* Contact Button */
+    #contactBtn {
+      position: fixed;
+      top: 80px;
+      right: 30px;
+      background-color: #1E90FF;
+      color: white;
+      border: none;
+      padding: 6px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    /* Contact Panel */
+    #contactPanel {
+      position: fixed;
+      right: -360px;
+      top: 0;
+      height: 85%;
+      width: 340px;
+      background-color: #ffffff;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.3);
+      padding: 20px;
+      transition: right 0.3s ease;
+      z-index: 2000;
+      overflow-y: auto;
+    }
+
+    #contactPanel.open {
+      right: 0;
+    }
+
+    #contactPanel h2 {
+      margin-top: 0;
+      color: #1E90FF;
+    }
+
+    #contactPanel p {
+      margin: 12px 0;
+      font-size: 15px;
+    }
+
+    #contactPanel a {
+      color: #1E90FF;
+      text-decoration: none;
+    }
+
+    #closeBtn {
+      background: none;
+      border: none;
+      font-size: 22px;
+      float: right;
+      cursor: pointer;
+      color: #555;
+    }
+
+#contactPanel input,
+#contactPanel textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+@media (max-width: 500px) {
+  #contactPanel {
+    width: 100%;
+  }
+}
+
+    input[type="submit"] {
+      background-color: #1E90FF;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0066cc;
+    }
+
+    hr {
+      margin: 20px 0;
+      border: none;
+      border-top: 1px solid #ddd;
+    } 		    
+	
     </style>
 </head>
 <body>
@@ -619,6 +729,56 @@ document.getElementById("admin3Dropdown").addEventListener("change", function ()
     };
     legend2.addTo(map);
 </script>
+  <!-- Contact Button -->
+  <button id="contactBtn">Contact Us</button>
 
+  <!-- Contact Panel -->
+  <div id="contactPanel">
+    <button id="closeBtn" title="Close">&times;</button>
+    <h2>Contact Us</h2>
+    <hr>
+    <p><strong>Name:</strong><br> Dr. Mansoor Leh</p>
+    <p><strong>Email:</strong><br> <a href="mailto:m.leh@cgiar.org">m.leh@cgiar.org</a></p>
+    <p><strong>Phone:</strong><br> +94112880000 Ext. 2220</p>
+    <p><strong>Address:</strong><br> International Water Management Institute ( IWMI ),<br> 127 Sunil Mawatha,<br> Battaramulla 10120,<br> Sri Lanka</p>
+
+	  
+	
+    <h3 style="margin-top:30px;">Send us a Message</h3>
+    <form action="mailto:m.leh@cgiar.org" method="post" enctype="text/plain">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <input type="submit" value="Send Message">
+    </form>
+  </div>
+
+  <script>
+    const contactBtn = document.getElementById("contactBtn");
+    const contactPanel = document.getElementById("contactPanel");
+    const closeBtn = document.getElementById("closeBtn");
+    const overlay = document.getElementById("overlay");
+
+    contactBtn.onclick = () => {
+      contactPanel.classList.add("open");
+      overlay.classList.add("active");
+    };
+
+    closeBtn.onclick = () => {
+      contactPanel.classList.remove("open");
+      overlay.classList.remove("active");
+    };
+
+    overlay.onclick = () => {
+      contactPanel.classList.remove("open");
+      overlay.classList.remove("active");
+    };
+  </script>
 </body>
 </html>
